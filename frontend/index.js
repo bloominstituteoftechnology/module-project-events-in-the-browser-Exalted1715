@@ -21,6 +21,8 @@ function moduleProject2() {
     left: 'ArrowLeft',
   }
 
+ 
+
   // Helper function to grab all squares
   const getAllSquares = () => document.querySelectorAll('.square')
 
@@ -71,6 +73,39 @@ function moduleProject2() {
 
   document.addEventListener('keydown', evt => {
     // 👉 TASK 3 - Use the arrow keys to highlight a new square 👈
+    let isUP = evt.key === keys.up || evt.key === 'W' || evt.key === 'w'
+    let isDown= evt.key === keys.down || evt.key === 'S' || evt.key === 's'
+    let isLeft= evt.key === keys.left || evt.key === 'A' || evt.key === 'a'
+    let isRight= evt.key === keys.right || evt.key === 'D' || evt.key === 'd'
+    //console.log(evt.key)
+    let targeted = document.querySelector('.targeted')
+
+    if(isUP){
+      if (targeted.parentElement.previousElementSibling) {
+        let index = Array.from(targeted.parentElement.children).indexOf(targeted);
+        targeted.classList.remove('targeted');
+        targeted.parentElement.previousElementSibling.children[index].classList.add('targeted');
+      }
+    } else if (isDown){
+      if(targeted.parentElement.nextElementSibling){
+        let index = Array.from(targeted.parentElement.children).indexOf(targeted)
+        targeted.classList.remove('targeted')
+        targeted.parentElement.nextElementSibling.children[index].classList.add('targeted')
+      }
+
+    }else if(isLeft){
+      if(targeted.previousElementSibling){
+        targeted.classList.remove('targeted')
+        targeted.previousElementSibling.classList.add('targeted')
+      } 
+
+    } else if(isRight){
+      if(targeted.nextElementSibling){
+        targeted.classList.remove('targeted')
+        targeted.nextElementSibling.classList.add('targeted')
+      } 
+
+    }
 
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
 
