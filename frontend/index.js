@@ -77,6 +77,7 @@ function moduleProject2() {
     let isDown= evt.key === keys.down || evt.key === 'S' || evt.key === 's'
     let isLeft= evt.key === keys.left || evt.key === 'A' || evt.key === 'a'
     let isRight= evt.key === keys.right || evt.key === 'D' || evt.key === 'd'
+    let isSpacebar = evt.key === keys.space || evt.key === ' '
     //console.log(evt.key)
     let targeted = document.querySelector('.targeted')
 
@@ -105,10 +106,30 @@ function moduleProject2() {
         targeted.nextElementSibling.classList.add('targeted')
       } 
 
+    } 
+    else if (isSpacebar){
+      let mosquito = targeted.firstChild
+      
+      if(mosquito &&  mosquito.dataset.status === 'alive'){
+        mosquito.dataset.status = 'dead'
+        mosquito.parentElement.style.backgroundColor = 'red'
+      }
     }
-
     // 👉 TASK 4 - Use the space bar to exterminate a mosquito 👈
+ let liveMosquitoes = document.querySelectorAll('[data-status=alive]')
+ if(!liveMosquitoes.length){
+    let elapsed = getTimeElapsed()
+  document.querySelector('p.info').textContent =
+  `Extermination completed in ${elapsed / 1000} seconds!`
 
+  let restartButton = document.createElement('button')
+  restartButton.textContent = 'Restart'
+  restartButton.addEventListener('click', () => {
+    location.reload()
+  })
+  document.querySelector('h2').insertAdjacentElement('beforeend', restartButton)
+  
+ }
     // 👉 TASK 5 - End the game 👈
   })
   // 👆 WORK WORK ABOVE THIS LINE 👆
